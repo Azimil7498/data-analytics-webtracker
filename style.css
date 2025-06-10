@@ -255,3 +255,28 @@ button:hover {
     font-size: 0.9rem;
   }
 }
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: #00ffe7;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
