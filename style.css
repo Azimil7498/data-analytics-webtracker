@@ -280,3 +280,6 @@ button:hover {
     display: flex;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
