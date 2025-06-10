@@ -7,11 +7,14 @@
   <title>Certificates - Azmil's Tracker</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
-
 <body>
+  <button id="scrollToTopBtn" title="Go to top">↑</button>
+
   <header>
     <nav class="navbar">
       <h1 class="logo">📊 Azmil's Tracker</h1>
@@ -24,10 +27,9 @@
         <li><a href="about.html">About</a></li>
       </ul>
       <label class="theme-switch">
-  <input type="checkbox" id="toggleTheme">
-  <span class="slider"></span>
-</label>
-
+        <input type="checkbox" id="toggleTheme">
+        <span class="slider"></span>
+      </label>
     </nav>
   </header>
 
@@ -49,59 +51,74 @@
       </div>
     </div>
   </main>
- <script>
-const certName = document.getElementById("certName");
-const certPlatform = document.getElementById("certPlatform");
-const certList = document.getElementById("certificateList");
 
-window.onload = function () {
-  loadCertificates();
-};
+  <!-- Certificate Script -->
+  <script>
+    const certName = document.getElementById("certName");
+    const certPlatform = document.getElementById("certPlatform");
+    const certList = document.getElementById("certificateList");
 
-function addCertificate() {
-  if (certName.value.trim() === "" || certPlatform.value.trim() === "") return;
+    window.onload = function () {
+      loadCertificates();
+    };
 
-  const cert = {
-    name: certName.value,
-    platform: certPlatform.value,
-  };
+    function addCertificate() {
+      if (certName.value.trim() === "" || certPlatform.value.trim() === "") return;
 
-  let certs = JSON.parse(localStorage.getItem("certificates")) || [];
-  certs.push(cert);
-  localStorage.setItem("certificates", JSON.stringify(certs));
+      const cert = {
+        name: certName.value,
+        platform: certPlatform.value,
+      };
 
-  certName.value = "";
-  certPlatform.value = "";
-  loadCertificates();
-}
+      let certs = JSON.parse(localStorage.getItem("certificates")) || [];
+      certs.push(cert);
+      localStorage.setItem("certificates", JSON.stringify(certs));
 
-function loadCertificates() {
-  certList.innerHTML = "";
-  let certs = JSON.parse(localStorage.getItem("certificates")) || [];
+      certName.value = "";
+      certPlatform.value = "";
+      loadCertificates();
+    }
 
-  certs.forEach((cert, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <span><strong>${cert.name}</strong> - ${cert.platform}</span>
-      <button onclick="deleteCertificate(${index})">❌</button>
-    `;
-    li.style.padding = "0.5rem";
-    li.style.backgroundColor = "#fff";
-    li.style.marginBottom = "0.5rem";
-    li.style.display = "flex";
-    li.style.justifyContent = "space-between";
-    li.style.alignItems = "center";
-    certList.appendChild(li);
-  });
-}
+    function loadCertificates() {
+      certList.innerHTML = "";
+      let certs = JSON.parse(localStorage.getItem("certificates")) || [];
 
-function deleteCertificate(index) {
-  let certs = JSON.parse(localStorage.getItem("certificates"));
-  certs.splice(index, 1);
-  localStorage.setItem("certificates", JSON.stringify(certs));
-  loadCertificates();
-}
+      certs.forEach((cert, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span><strong>${cert.name}</strong> - ${cert.platform}</span>
+          <button onclick="deleteCertificate(${index})">❌</button>
+        `;
+        li.style.padding = "0.5rem";
+        li.style.backgroundColor = "#fff";
+        li.style.marginBottom = "0.5rem";
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+        certList.appendChild(li);
+      });
+    }
 
+    function deleteCertificate(index) {
+      let certs = JSON.parse(localStorage.getItem("certificates"));
+      certs.splice(index, 1);
+      localStorage.setItem("certificates", JSON.stringify(certs));
+      loadCertificates();
+    }
+  </script>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    // Add animations to visible sections
+    document.querySelectorAll('.cert-section, .cert-card, .card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
+      el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
+    });
   </script>
 </body>
 </html>

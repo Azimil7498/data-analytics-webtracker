@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Courses - Azmil's Tracker</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -99,5 +101,19 @@ function loadCourses() {
 }
 
   </script>
+  <!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init(
+    {
+  duration: 1000, // animation duration in ms
+  once: true, 
+    }
+  );
+    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
+    el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
+  });
+</script>
+
 </body>
 </html>

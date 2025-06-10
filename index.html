@@ -6,22 +6,23 @@
   <title>Azmil's Data Analytics Tracker</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-
-
 </head>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
 
 <body>
+  <button id="scrollToTopBtn" title="Go to top">↑</button>
+
   <header>
     <nav class="navbar">
       <h1 class="logo">📊 Azmil's Tracker</h1>
       <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-<label class="theme-switch">
-  <input type="checkbox" id="toggleTheme">
-  <span class="slider"></span>
-</label>
+      <label class="theme-switch">
+        <input type="checkbox" id="toggleTheme">
+        <span class="slider"></span>
+      </label>
 
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -40,6 +41,21 @@
       <p>Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
     </section>
   </main>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
+    // Automatically apply AOS to common sections
+    const sections = document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard, .todo-section');
+    sections.forEach((el, index) => {
+      el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
