@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List - Azmil's Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">📊 Azmil's Tracker</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="todo.html">To-Do</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="todo-section">
+    <h2>Your To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter new task..." />
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+  </main>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+
+window.onload = function () {
+  loadTasks();
+};
+
+function addTask() {
+  if (taskInput.value.trim() === "") return;
+
+  const task = {
+    text: taskInput.value,
+    done: false,
+  };
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  taskInput.value = "";
+  loadTasks();
+}
+
+function loadTasks() {
+  taskList.innerHTML = "";
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <input type="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${index})">
+      <span style="text-decoration: ${task.done ? "line-through" : "none"}">${task.text}</span>
+      <button onclick="deleteTask(${index})">❌</button>
+    `;
+    taskList.appendChild(li);
+  });
+}
+
+function toggleTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks[index].done = !tasks[index].done;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+function deleteTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+  </script>
+</body>
+</html>

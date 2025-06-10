@@ -1,0 +1,213 @@
+/* ---------- GOOGLE FONTS ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* ---------- GLOBAL RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #f1f1f1;
+  min-height: 100vh;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  color: #00ffe7;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: 0.3s;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: #00ffe7;
+  transition: 0.4s ease-in-out;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* ---------- HERO & PAGES ---------- */
+.hero, .dashboard, .todo-section, .course-section, .cert-section, .about-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #dcdcdc;
+}
+
+.course-section {
+  color: black;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.course-section h2{
+    color:gold;
+    text-decoration:underline;
+
+}
+#courseInput{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   color:#FFD700;
+  }
+
+/* ---------- CARDS ---------- */
+.card, .profile-card, .progress-container, #taskList li, .cert-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: 0.3s ease-in-out;
+}
+
+.card:hover, .cert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 255, 231, 0.15);
+}
+
+/* ---------- PROGRESS BARS ---------- */
+.progress-container label {
+  font-weight: 600;
+  color: #00ffe7;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+progress {
+  width: 100%;
+  height: 20px;
+  appearance: none;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #444;
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(to right, #00ffe7, #00c3ff);
+}
+
+/* ---------- INPUT & BUTTONS ---------- */
+input[type="text"] {
+  padding: 0.6rem;
+  width: 60%;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  margin-right: 1rem;
+  background: rgba(255,255,255,0.1);
+  color:white;
+}
+
+button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  background: linear-gradient(to right, #00ffe7, #00c3ff);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #00ffe7;
+}
+
+/* ---------- CERTIFICATES GRID ---------- */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.cert-card img {
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* ---------- PROFILE ---------- */
+.profile-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #00ffe7;
+  margin-bottom: 1rem;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}

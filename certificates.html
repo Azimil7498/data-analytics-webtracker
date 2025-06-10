@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates - Azmil's Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">📊 Azmil's Tracker</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="todo.html">To-Do</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="cert-section">
+    <h2>My Certificates</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <img src="assets/certificates/python.jpg" alt="Python Certificate" />
+        <h3>Python Basics</h3>
+        <p>Completed: June 2025</p>
+        <a href="assets/certificates/python.pdf" download>Download PDF</a>
+      </div>
+
+      <div class="cert-card">
+        <img src="assets/certificates/excel.jpg" alt="Excel Certificate" />
+        <h3>Excel Mastery</h3>
+        <p>Completed: May 2025</p>
+        <a href="assets/certificates/excel.pdf" download>Download PDF</a>
+      </div>
+    </div>
+  </main>
+ <script>
+const certName = document.getElementById("certName");
+const certPlatform = document.getElementById("certPlatform");
+const certList = document.getElementById("certificateList");
+
+window.onload = function () {
+  loadCertificates();
+};
+
+function addCertificate() {
+  if (certName.value.trim() === "" || certPlatform.value.trim() === "") return;
+
+  const cert = {
+    name: certName.value,
+    platform: certPlatform.value,
+  };
+
+  let certs = JSON.parse(localStorage.getItem("certificates")) || [];
+  certs.push(cert);
+  localStorage.setItem("certificates", JSON.stringify(certs));
+
+  certName.value = "";
+  certPlatform.value = "";
+  loadCertificates();
+}
+
+function loadCertificates() {
+  certList.innerHTML = "";
+  let certs = JSON.parse(localStorage.getItem("certificates")) || [];
+
+  certs.forEach((cert, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span><strong>${cert.name}</strong> - ${cert.platform}</span>
+      <button onclick="deleteCertificate(${index})">❌</button>
+    `;
+    li.style.padding = "0.5rem";
+    li.style.backgroundColor = "#fff";
+    li.style.marginBottom = "0.5rem";
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
+    certList.appendChild(li);
+  });
+}
+
+function deleteCertificate(index) {
+  let certs = JSON.parse(localStorage.getItem("certificates"));
+  certs.splice(index, 1);
+  localStorage.setItem("certificates", JSON.stringify(certs));
+  loadCertificates();
+}
+
+  </script>
+</body>
+</html>

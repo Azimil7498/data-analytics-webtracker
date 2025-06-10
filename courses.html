@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses - Azmil's Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">📊 Azmil's Tracker</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="todo.html">To-Do</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="course-section">
+    <h2>My Courses</h2>
+    <ul id="courseList"></ul>
+
+    <input type="text" id="courseInput" placeholder="Add new course..." />
+    <button onclick="addCourse()">Add Course</button>
+  </main>
+
+  <script>
+    const courseList = document.getElementById("courseList");
+const courseInput = document.getElementById("courseInput");
+
+window.onload = function () {
+  loadCourses();
+};
+
+function addCourse() {
+  if (courseInput.value.trim() === "") return;
+
+  const course = {
+    name: courseInput.value,
+    status: "In Progress",
+  };
+
+  let courses = JSON.parse(localStorage.getItem("courses")) || [];
+  courses.push(course);
+  localStorage.setItem("courses", JSON.stringify(courses));
+  courseInput.value = "";
+  loadCourses();
+}
+
+function toggleCourseStatus(index) {
+  let courses = JSON.parse(localStorage.getItem("courses"));
+  courses[index].status =
+    courses[index].status === "In Progress" ? "Completed" : "In Progress";
+  localStorage.setItem("courses", JSON.stringify(courses));
+  loadCourses();
+}
+
+function deleteCourse(index) {
+  let courses = JSON.parse(localStorage.getItem("courses"));
+  courses.splice(index, 1);
+  localStorage.setItem("courses", JSON.stringify(courses));
+  loadCourses();
+}
+
+function loadCourses() {
+  courseList.innerHTML = "";
+  let courses = JSON.parse(localStorage.getItem("courses")) || [];
+
+  courses.forEach((course, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span>${course.name} - <strong>${course.status}</strong></span>
+      <div>
+        <button onclick="toggleCourseStatus(${index})">Toggle</button>
+        <button onclick="deleteCourse(${index})">❌</button>
+      </div>
+    `;
+    li.style.padding = "0.5rem";
+    li.style.backgroundColor = "#fff";
+    li.style.marginBottom = "0.5rem";
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
+    courseList.appendChild(li);
+  });
+}
+
+  </script>
+</body>
+</html>
