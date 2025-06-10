@@ -283,3 +283,24 @@ button:hover {
 html {
   scroll-behavior: smooth;
 }
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  background: #00ffe7;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 0 10px rgba(0,255,231,0.6);
+  transition: all 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  transform: scale(1.1);
+  background: #00c3ff;
+}
