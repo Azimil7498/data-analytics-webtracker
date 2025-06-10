@@ -20,3 +20,21 @@
     });
   });
 
+const toggle = document.getElementById("toggleTheme");
+  const body = document.body;
+
+  // Check localStorage
+  if (localStorage.getItem("theme") === "light") {
+    body.classList.add("light-theme");
+    toggle.checked = true;
+  }
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      body.classList.add("light-theme");
+      localStorage.setItem("theme", "light");
+    } else {
+      body.classList.remove("light-theme");
+      localStorage.setItem("theme", "dark");
+    }
+  });
