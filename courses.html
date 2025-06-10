@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Courses - Azmil's Tracker</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+  <!-- Google Fonts and CSS -->
   <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
+
 <body>
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top">↑</button>
+
+  <!-- Navbar -->
   <header>
     <nav class="navbar">
       <h1 class="logo">📊 Azmil's Tracker</h1>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="todo.html">To-Do</a></li>
@@ -24,96 +28,97 @@
         <li><a href="about.html">About</a></li>
       </ul>
       <label class="theme-switch">
-  <input type="checkbox" id="toggleTheme">
-  <span class="slider"></span>
-</label>
-
+        <input type="checkbox" id="toggleTheme">
+        <span class="slider"></span>
+      </label>
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main class="course-section">
-    <h2>My Courses</h2>
-    <ul id="courseList"></ul>
+    <section>
+      <h2>My Courses</h2>
+      <ul id="courseList"></ul>
 
-    <input type="text" id="courseInput" placeholder="Add new course..." />
-    <button onclick="addCourse()">Add Course</button>
+      <input type="text" id="courseInput" placeholder="Add new course..." />
+      <button onclick="addCourse()">Add Course</button>
+    </section>
   </main>
 
+  <!-- Course Handling Script -->
   <script>
     const courseList = document.getElementById("courseList");
-const courseInput = document.getElementById("courseInput");
+    const courseInput = document.getElementById("courseInput");
 
-window.onload = function () {
-  loadCourses();
-};
+    window.onload = function () {
+      loadCourses();
+    };
 
-function addCourse() {
-  if (courseInput.value.trim() === "") return;
+    function addCourse() {
+      if (courseInput.value.trim() === "") return;
 
-  const course = {
-    name: courseInput.value,
-    status: "In Progress",
-  };
+      const course = {
+        name: courseInput.value,
+        status: "In Progress",
+      };
 
-  let courses = JSON.parse(localStorage.getItem("courses")) || [];
-  courses.push(course);
-  localStorage.setItem("courses", JSON.stringify(courses));
-  courseInput.value = "";
-  loadCourses();
-}
-
-function toggleCourseStatus(index) {
-  let courses = JSON.parse(localStorage.getItem("courses"));
-  courses[index].status =
-    courses[index].status === "In Progress" ? "Completed" : "In Progress";
-  localStorage.setItem("courses", JSON.stringify(courses));
-  loadCourses();
-}
-
-function deleteCourse(index) {
-  let courses = JSON.parse(localStorage.getItem("courses"));
-  courses.splice(index, 1);
-  localStorage.setItem("courses", JSON.stringify(courses));
-  loadCourses();
-}
-
-function loadCourses() {
-  courseList.innerHTML = "";
-  let courses = JSON.parse(localStorage.getItem("courses")) || [];
-
-  courses.forEach((course, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <span>${course.name} - <strong>${course.status}</strong></span>
-      <div>
-        <button onclick="toggleCourseStatus(${index})">Toggle</button>
-        <button onclick="deleteCourse(${index})">❌</button>
-      </div>
-    `;
-    li.style.padding = "0.5rem";
-    li.style.backgroundColor = "#fff";
-    li.style.marginBottom = "0.5rem";
-    li.style.display = "flex";
-    li.style.justifyContent = "space-between";
-    li.style.alignItems = "center";
-    courseList.appendChild(li);
-  });
-}
-
-  </script>
-  <!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init(
-    {
-  duration: 1000, // animation duration in ms
-  once: true, 
+      let courses = JSON.parse(localStorage.getItem("courses")) || [];
+      courses.push(course);
+      localStorage.setItem("courses", JSON.stringify(courses));
+      courseInput.value = "";
+      loadCourses();
     }
-  );
-    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
-    el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-  });
-</script>
 
+    function toggleCourseStatus(index) {
+      let courses = JSON.parse(localStorage.getItem("courses"));
+      courses[index].status =
+        courses[index].status === "In Progress" ? "Completed" : "In Progress";
+      localStorage.setItem("courses", JSON.stringify(courses));
+      loadCourses();
+    }
+
+    function deleteCourse(index) {
+      let courses = JSON.parse(localStorage.getItem("courses"));
+      courses.splice(index, 1);
+      localStorage.setItem("courses", JSON.stringify(courses));
+      loadCourses();
+    }
+
+    function loadCourses() {
+      courseList.innerHTML = "";
+      let courses = JSON.parse(localStorage.getItem("courses")) || [];
+
+      courses.forEach((course, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${course.name} - <strong>${course.status}</strong></span>
+          <div>
+            <button onclick="toggleCourseStatus(${index})">Toggle</button>
+            <button onclick="deleteCourse(${index})">❌</button>
+          </div>
+        `;
+        li.style.padding = "0.5rem";
+        li.style.backgroundColor = "#fff";
+        li.style.marginBottom = "0.5rem";
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+        courseList.appendChild(li);
+      });
+    }
+  </script>
+
+  <!-- AOS Library for Animations -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard')
+      .forEach((el, index) => {
+        el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
+      });
+  </script>
+
+  <!-- Global Site Script -->
+  <script src="script.js"></script>
 </body>
 </html>

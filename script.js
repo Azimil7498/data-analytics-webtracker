@@ -1,40 +1,63 @@
-  function toggleMenu() {
-    const navLinks = document.getElementById("navLinks");
-    navLinks.classList.toggle("active");
-  }
- 
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.getElementById("navLinks");
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-  window.onscroll = function () {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-      scrollToTopBtn.style.display = "block";
-    } else {
-      scrollToTopBtn.style.display = "none";
-    }
-  };
-
-  scrollToTopBtn.addEventListener("click", function () {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-
-const toggle = document.getElementById("toggleTheme");
+  const toggle = document.getElementById("toggleTheme");
   const body = document.body;
 
-  // Check localStorage
-  if (localStorage.getItem("theme") === "light") {
-    body.classList.add("light-theme");
-    toggle.checked = true;
+  // Toggle mobile nav menu
+  function toggleMenu() {
+    if (navLinks) {
+      navLinks.classList.toggle("active");
+    }
+  }
+  window.toggleMenu = toggleMenu; // Make it global for HTML onclick use
+
+  // Show scroll-to-top button on scroll
+  function handleScroll() {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollToTopBtn) {
+      scrollToTopBtn.style.display = scrollTop > 300 ? "block" : "none";
+    }
   }
 
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      body.classList.add("light-theme");
-      localStorage.setItem("theme", "light");
-    } else {
-      body.classList.remove("light-theme");
-      localStorage.setItem("theme", "dark");
+  // Throttle scroll handler for performance
+  let scrollThrottle;
+  window.addEventListener("scroll", () => {
+    if (!scrollThrottle) {
+      scrollThrottle = setTimeout(() => {
+        handleScroll();
+        scrollThrottle = null;
+      }, 150);
     }
   });
+
+  // Scroll to top on button click
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  // Theme toggle (dark/light)
+  if (toggle) {
+    if (localStorage.getItem("theme") === "light") {
+      body.classList.add("light-theme");
+      toggle.checked = true;
+    }
+
+    toggle.addEventListener("change", () => {
+      if (toggle.checked) {
+        body.classList.add("light-theme");
+        localStorage.setItem("theme", "light");
+      } else {
+        body.classList.remove("light-theme");
+        localStorage.setItem("theme", "dark");
+      }
+    });
+  }
+});

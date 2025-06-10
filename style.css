@@ -1,6 +1,20 @@
 /* ---------- GOOGLE FONTS ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+/* ---------- VARIABLES ---------- */
+:root {
+  --primary-color: #00ffe7;
+  --accent-color: #00c3ff;
+  --text-light: #f1f1f1;
+  --text-dark: #111;
+  --bg-dark: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  --bg-light: #f5f5f5;
+  --card-bg-dark: rgba(255, 255, 255, 0.06);
+  --card-bg-light: rgba(0, 0, 0, 0.06);
+  --border-dark: rgba(255, 255, 255, 0.18);
+  --border-light: rgba(0, 0, 0, 0.08);
+}
+
 /* ---------- GLOBAL RESET ---------- */
 * {
   margin: 0;
@@ -10,9 +24,14 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  color: #f1f1f1;
+  background: var(--bg-dark);
+  color: var(--text-light);
   min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* ---------- NAVBAR ---------- */
@@ -27,10 +46,11 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: background 0.3s;
 }
 
 .logo {
-  color: #00ffe7;
+  color: var(--primary-color);
   font-size: 1.8rem;
   font-weight: 700;
 }
@@ -39,6 +59,15 @@ body {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-links li a {
@@ -55,8 +84,8 @@ body {
   bottom: -5px;
   left: 0;
   height: 2px;
-  width: 0%;
-  background: #00ffe7;
+  width: 0;
+  background: var(--primary-color);
   transition: 0.4s ease-in-out;
 }
 
@@ -64,8 +93,8 @@ body {
   width: 100%;
 }
 
-/* ---------- HERO & PAGES ---------- */
-.hero, .dashboard, .todo-section, .course-section, .cert-section, .about-section {
+/* ---------- SECTIONS ---------- */
+.section {
   padding: 3rem 2rem;
   text-align: center;
 }
@@ -86,26 +115,28 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
 }
-.course-section h2{
-    color:gold;
-    text-decoration:underline;
 
+.course-section h2 {
+  color: gold;
+  text-decoration: underline;
 }
-#courseInput{
-    font-family:'Gill Sans', 'Gill Sans MT',' Calibri', 'Trebuchet MS', sans-serif;
-   color:#FFD700;
-  }
+
+#courseInput {
+  font-family: 'Gill Sans', 'Gill Sans MT',' Calibri', 'Trebuchet MS', sans-serif;
+  color: gold;
+}
 
 /* ---------- CARDS ---------- */
 .card, .profile-card, .progress-container, #taskList li, .cert-card {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--card-bg-dark);
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border-dark);
   transition: 0.3s ease-in-out;
+  color: inherit;
 }
 
 .card:hover, .cert-card:hover {
@@ -116,7 +147,7 @@ body {
 /* ---------- PROGRESS BARS ---------- */
 .progress-container label {
   font-weight: 600;
-  color: #00ffe7;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -134,7 +165,7 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  background: linear-gradient(to right, #00ffe7, #00c3ff);
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
 }
 
 /* ---------- INPUT & BUTTONS ---------- */
@@ -147,7 +178,7 @@ input[type="text"] {
   outline: none;
   margin-right: 1rem;
   background: rgba(255,255,255,0.1);
-  color:white;
+  color: white;
 }
 
 button {
@@ -155,7 +186,7 @@ button {
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  background: linear-gradient(to right, #00ffe7, #00c3ff);
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
   color: #000;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -163,7 +194,7 @@ button {
 
 button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px #00ffe7;
+  box-shadow: 0 0 10px var(--primary-color);
 }
 
 /* ---------- CERTIFICATES GRID ---------- */
@@ -186,109 +217,17 @@ button:hover {
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #00ffe7;
+  border: 3px solid var(--primary-color);
   margin-bottom: 1rem;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-}
-/* ---------- EXTRA SMALL DEVICES (Mobile <480px) ---------- */
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .nav-links {
-    gap: 0.8rem;
-    width: 100%;
-  }
-
-  .hero, .dashboard, .todo-section, .course-section, .cert-section, .about-section {
-    padding: 2rem 1rem;
-    text-align: left;
-  }
-
-  .hero h1 {
-    font-size: 1.7rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .cert-card img {
-    height: 120px;
-  }
-
-  .profile-card img {
-    width: 100px;
-    height: 100px;
-  }
-
-  button {
-    font-size: 0.9rem;
-  }
-}
-.hamburger {
-  display: none;
-  font-size: 2rem;
-  color: #00ffe7;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 1rem;
-    border-radius: 12px;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-}
-html {
-  scroll-behavior: smooth;
-}
+/* ---------- SCROLL TO TOP ---------- */
 #scrollToTopBtn {
   position: fixed;
   bottom: 40px;
   right: 40px;
   z-index: 999;
-  background: #00ffe7;
+  background: var(--primary-color);
   color: black;
   border: none;
   border-radius: 50%;
@@ -302,8 +241,10 @@ html {
 
 #scrollToTopBtn:hover {
   transform: scale(1.1);
-  background: #00c3ff;
+  background: var(--accent-color);
 }
+
+/* ---------- TOGGLE THEME ---------- */
 .theme-switch {
   position: relative;
   display: inline-block;
@@ -342,17 +283,17 @@ html {
 }
 
 input:checked + .slider {
-  background-color: #00ffe7;
+  background-color: var(--primary-color);
 }
 
 input:checked + .slider:before {
   transform: translateX(24px);
 }
 
-/* Light Theme Overrides */
+/* ---------- LIGHT THEME ---------- */
 body.light-theme {
-  background: #f5f5f5;
-  color: #111;
+  background: var(--bg-light);
+  color: var(--text-dark);
 }
 
 body.light-theme .navbar {
@@ -361,12 +302,92 @@ body.light-theme .navbar {
 }
 
 body.light-theme .nav-links li a {
-  color: #111;
+  color: var(--text-dark);
 }
 
 body.light-theme .card,
 body.light-theme .cert-card,
 body.light-theme .profile-card {
-  background: rgba(0, 0, 0, 0.06);
-  color: #111;
+  background: var(--card-bg-light);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+}
+
+body.light-theme #scrollToTopBtn {
+  background: #111;
+  color: #fff;
+}
+
+body.light-theme .slider {
+  background-color: #ddd;
+}
+
+/* ---------- RESPONSIVE ---------- */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  input[type="text"], button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .cert-card img {
+    height: 120px;
+  }
+
+  .profile-card img {
+    width: 100px;
+    height: 100px;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
 }
