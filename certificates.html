@@ -1,59 +1,54 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificates - Azmil's Tracker</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Certificates - Azmil's Tracker</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet">
+</link></head>
 <body>
-  <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">📊 Azmil's Tracker</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="todo.html">To-Do</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-      <label class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <span class="slider"></span>
-      </label>
-    </nav>
-  </header>
-
-  <main class="cert-section">
-    <h2>My Certificates</h2>
-    <div class="cert-grid">
-      <div class="cert-card">
-        <img src="assets/certificates/python.jpg" alt="Python Certificate" />
-        <h3>Python Basics</h3>
-        <p>Completed: June 2025</p>
-        <a href="assets/certificates/python.pdf" download>Download PDF</a>
-      </div>
-
-      <div class="cert-card">
-        <img src="assets/certificates/excel.jpg" alt="Excel Certificate" />
-        <h3>Excel Mastery</h3>
-        <p>Completed: May 2025</p>
-        <a href="assets/certificates/excel.pdf" download>Download PDF</a>
-      </div>
-    </div>
-  </main>
-
-  <!-- Certificate Script -->
-  <script>
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+<header>
+<nav class="navbar">
+<h1 class="logo">📊 Azmil's Tracker</h1>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="todo.html">To-Do</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+<label class="theme-switch">
+<input id="toggleTheme" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</nav>
+</header>
+<main class="cert-section">
+<h2>My Certificates</h2>
+<div class="cert-grid">
+<div class="cert-card">
+<img alt="Python Certificate" src="assets/certificates/python.jpg"/>
+<h3>Python Basics</h3>
+<p>Completed: June 2025</p>
+<a download="" href="assets/certificates/python.pdf">Download PDF</a>
+</div>
+<div class="cert-card">
+<img alt="Excel Certificate" src="assets/certificates/excel.jpg"/>
+<h3>Excel Mastery</h3>
+<p>Completed: May 2025</p>
+<a download="" href="assets/certificates/excel.pdf">Download PDF</a>
+</div>
+</div>
+</main>
+<!-- Certificate Script -->
+<script>
     const certName = document.getElementById("certName");
     const certPlatform = document.getElementById("certPlatform");
     const certList = document.getElementById("certificateList");
@@ -106,10 +101,9 @@
       loadCertificates();
     }
   </script>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
     AOS.init({
       duration: 1000,
       once: true
@@ -120,5 +114,5 @@
       el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
     });
   </script>
-</body>
+<script src="script.js"></script></body>
 </html>

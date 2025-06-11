@@ -1,3 +1,14 @@
+
+// Apply theme before DOMContentLoaded
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light-theme");
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("toggleTheme");
+    if (toggle) toggle.checked = true;
+  });
+}
+
+
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {

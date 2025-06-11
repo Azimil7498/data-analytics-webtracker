@@ -1,52 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Azmil's Tracker</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About - Azmil's Tracker</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet">
+</link></head>
 <body>
-  <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">📊 Azmil's Tracker</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="todo.html">To-Do</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-      <label class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <span class="slider"></span>
-      </label>
-    </nav>
-  </header>
-
-  <main class="about-section">
-    <h2>About Me</h2>
-    <div class="profile-card">
-      <img src="assets/images/profile.jpg" alt="Azmil's Photo" />
-      <h3>Shaikh Azimil Kabir</h3>
-      <p><strong>Role:</strong> BTech CSE Student | Aspiring Data Analyst</p>
-      <p>I’m passionate about data and how it drives decision-making. Currently exploring Python, Excel, SQL, and Power BI during my semester break.</p>
-      <p>Dreaming of that office life with an ID card, laptop bag, elevator buzz, and solving real-world problems with data. 🔍📊</p>
-      <p><strong>Email:</strong> azmilshaikh9@gmail.com</p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank">Click here</a></p>
-    </div>
-  </main>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+<header>
+<nav class="navbar">
+<h1 class="logo">📊 Azmil's Tracker</h1>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="todo.html">To-Do</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+<label class="theme-switch">
+<input id="toggleTheme" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</nav>
+</header>
+<main class="about-section">
+<h2>About Me</h2>
+<div class="profile-card">
+<img alt="Azmil's Photo" src="assets/images/profile.jpg"/>
+<h3>Shaikh Azimil Kabir</h3>
+<p><strong>Role:</strong> BTech CSE Student | Aspiring Data Analyst</p>
+<p>I’m passionate about data and how it drives decision-making. Currently exploring Python, Excel, SQL, and Power BI during my semester break.</p>
+<p>Dreaming of that office life with an ID card, laptop bag, elevator buzz, and solving real-world problems with data. 🔍📊</p>
+<p><strong>Email:</strong> azmilshaikh9@gmail.com</p>
+<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank">Click here</a></p>
+</div>
+</main>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
     AOS.init({
       duration: 1000,
       once: true
@@ -57,5 +54,5 @@
       el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
     });
   </script>
-</body>
+<script src="script.js"></script></body>
 </html>

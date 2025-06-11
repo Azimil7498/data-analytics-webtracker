@@ -1,52 +1,47 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Courses - Azmil's Tracker</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- Google Fonts and CSS -->
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Courses - Azmil's Tracker</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- Google Fonts and CSS -->
+<link href="style.css" rel="stylesheet"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
-
 <body>
-  <!-- Scroll to Top Button -->
-  <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-  <!-- Navbar -->
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">📊 Azmil's Tracker</h1>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="todo.html">To-Do</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-      <label class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <span class="slider"></span>
-      </label>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main class="course-section">
-    <section>
-      <h2>My Courses</h2>
-      <ul id="courseList"></ul>
-
-      <input type="text" id="courseInput" placeholder="Add new course..." />
-      <button onclick="addCourse()">Add Course</button>
-    </section>
-  </main>
-
-  <!-- Course Handling Script -->
-  <script>
+<!-- Scroll to Top Button -->
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+<!-- Navbar -->
+<header>
+<nav class="navbar">
+<h1 class="logo">📊 Azmil's Tracker</h1>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="todo.html">To-Do</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+<label class="theme-switch">
+<input id="toggleTheme" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="course-section">
+<section>
+<h2>My Courses</h2>
+<ul id="courseList"></ul>
+<input id="courseInput" placeholder="Add new course..." type="text">
+<button onclick="addCourse()">Add Course</button>
+</input></section>
+</main>
+<!-- Course Handling Script -->
+<script>
     const courseList = document.getElementById("courseList");
     const courseInput = document.getElementById("courseInput");
 
@@ -107,18 +102,16 @@
       });
     }
   </script>
-
-  <!-- AOS Library for Animations -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+<!-- AOS Library for Animations -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
     AOS.init({ duration: 1000, once: true });
     document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard')
       .forEach((el, index) => {
         el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
       });
   </script>
-
-  <!-- Global Site Script -->
-  <script src="script.js"></script>
+<!-- Global Site Script -->
+<script src="script.js"></script>
 </body>
 </html>
