@@ -1,118 +1,211 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Certificates - Azmil's Tracker</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet">
-</link></head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="View and manage your data analytics certificates with Azmil's Tracker."/>
+    <meta name="theme-color" content="#0f2027"/>
+    <title>Certificates - Azmil's Tracker</title>
+    
+    <!-- Favicon -->
+    <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+    
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet"/>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+</head>
 <body>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
-<header>
-<nav class="navbar">
-<h1 class="logo">📊 Azmil's Tracker</h1>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html">To-Do</a></li>
-<li><a href="courses.html">Courses</a></li>
-<li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html">About</a></li>
-</ul>
-<label class="theme-switch">
-<input id="toggleTheme" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</nav>
-</header>
-<main class="cert-section">
-<h2>My Certificates</h2>
-<div class="cert-grid">
-<div class="cert-card">
-<img alt="Python Certificate" src="assets/certificates/python.jpg"/>
-<h3>Python Basics</h3>
-<p>Completed: June 2025</p>
-<a download="" href="assets/certificates/python.pdf">Download PDF</a>
-</div>
-<div class="cert-card">
-<img alt="Excel Certificate" src="assets/certificates/excel.jpg"/>
-<h3>Excel Mastery</h3>
-<p>Completed: May 2025</p>
-<a download="" href="assets/certificates/excel.pdf">Download PDF</a>
-</div>
-</div>
-</main>
-<!-- Certificate Script -->
-<script>
-    const certName = document.getElementById("certName");
-    const certPlatform = document.getElementById("certPlatform");
-    const certList = document.getElementById("certificateList");
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
+    
+    <!-- Header -->
+    <header>
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <h1 class="logo">📊 Azmil's Tracker</h1>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <label class="theme-switch" aria-label="Toggle dark/light theme">
+                <input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
+                <span class="slider"></span>
+            </label>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="todo.html">To-Do</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="certificates.html" aria-current="page">Certificates</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    window.onload = function () {
-      loadCertificates();
-    };
+    <!-- Main Content -->
+    <main>
+        <section class="cert-section" aria-label="Certificates section">
+            <div class="cert-header" data-aos="fade-up">
+                <h2>My Certificates</h2>
+                <p class="subtitle">Showcase your achievements and skills</p>
+            </div>
 
-    function addCertificate() {
-      if (certName.value.trim() === "" || certPlatform.value.trim() === "") return;
+            <div class="cert-stats" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <span class="stat-icon">🏆</span>
+                    <h3>Total Certificates</h3>
+                    <p class="stat-value" id="totalCerts">0</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">📅</span>
+                    <h3>Latest Achievement</h3>
+                    <p class="stat-value" id="latestCert">-</p>
+                </div>
+            </div>
 
-      const cert = {
-        name: certName.value,
-        platform: certPlatform.value,
-      };
+            <div class="cert-filters" data-aos="fade-up" data-aos-delay="200">
+                <button class="filter-button active" data-filter="all">All</button>
+                <button class="filter-button" data-filter="python">Python</button>
+                <button class="filter-button" data-filter="excel">Excel</button>
+                <button class="filter-button" data-filter="sql">SQL</button>
+                <button class="filter-button" data-filter="powerbi">Power BI</button>
+            </div>
 
-      let certs = JSON.parse(localStorage.getItem("certificates")) || [];
-      certs.push(cert);
-      localStorage.setItem("certificates", JSON.stringify(certs));
+            <div class="cert-grid" data-aos="fade-up" data-aos-delay="300">
+                <div class="cert-card" data-category="python">
+                    <div class="cert-image">
+                        <img alt="Python Certificate" src="assets/certificates/python.jpg"/>
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/python.pdf" class="cert-link" download>
+                                <span class="icon">📥</span> Download
+                            </a>
+                            <a href="#" class="cert-link view-cert" data-cert="python">
+                                <span class="icon">👁️</span> View
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <h3>Python Basics</h3>
+                        <p class="cert-platform">Platform: Coursera</p>
+                        <p class="cert-date">Completed: June 2025</p>
+                        <div class="cert-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Programming</span>
+                        </div>
+                    </div>
+                </div>
 
-      certName.value = "";
-      certPlatform.value = "";
-      loadCertificates();
-    }
+                <div class="cert-card" data-category="excel">
+                    <div class="cert-image">
+                        <img alt="Excel Certificate" src="assets/certificates/excel.jpg"/>
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/excel.pdf" class="cert-link" download>
+                                <span class="icon">📥</span> Download
+                            </a>
+                            <a href="#" class="cert-link view-cert" data-cert="excel">
+                                <span class="icon">👁️</span> View
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <h3>Excel Mastery</h3>
+                        <p class="cert-platform">Platform: Udemy</p>
+                        <p class="cert-date">Completed: May 2025</p>
+                        <div class="cert-tags">
+                            <span class="tag">Excel</span>
+                            <span class="tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    function loadCertificates() {
-      certList.innerHTML = "";
-      let certs = JSON.parse(localStorage.getItem("certificates")) || [];
+        <!-- Certificate Modal -->
+        <div id="certModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <img id="modalImage" src="" alt="Certificate Preview"/>
+            </div>
+        </div>
+    </main>
 
-      certs.forEach((cert, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <span><strong>${cert.name}</strong> - ${cert.platform}</span>
-          <button onclick="deleteCertificate(${index})">❌</button>
-        `;
-        li.style.padding = "0.5rem";
-        li.style.backgroundColor = "#fff";
-        li.style.marginBottom = "0.5rem";
-        li.style.display = "flex";
-        li.style.justifyContent = "space-between";
-        li.style.alignItems = "center";
-        certList.appendChild(li);
-      });
-    }
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Azmil's Data Analytics Tracker. All rights reserved.</p>
+    </footer>
 
-    function deleteCertificate(index) {
-      let certs = JSON.parse(localStorage.getItem("certificates"));
-      certs.splice(index, 1);
-      localStorage.setItem("certificates", JSON.stringify(certs));
-      loadCertificates();
-    }
-  </script>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Certificate Management
+        const certGrid = document.querySelector('.cert-grid');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const modal = document.getElementById('certModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
 
-    // Add animations to visible sections
-    document.querySelectorAll('.cert-section, .cert-card, .card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
-      el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-    });
-  </script>
-<script src="script.js"></script></body>
+        // Initialize
+        window.onload = function() {
+            updateCertStats();
+            setupEventListeners();
+        };
+
+        function setupEventListeners() {
+            // Filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterCertificates(button.dataset.filter);
+                });
+            });
+
+            // Modal
+            document.querySelectorAll('.view-cert').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const cert = e.target.closest('.view-cert').dataset.cert;
+                    showCertificate(cert);
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        function filterCertificates(filter) {
+            const cards = document.querySelectorAll('.cert-card');
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function showCertificate(cert) {
+            const imagePath = `assets/certificates/${cert}.jpg`;
+            modalImage.src = imagePath;
+            modal.style.display = 'flex';
+        }
+
+        function updateCertStats() {
+            const totalCerts = document.querySelectorAll('.cert-card').length;
+            const latestCert = document.querySelector('.cert-date')?.textContent.split(': ')[1] || '-';
+            
+            document.getElementById('totalCerts').textContent = totalCerts;
+            document.getElementById('latestCert').textContent = latestCert;
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
 </html>

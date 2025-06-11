@@ -30,20 +30,105 @@
 </nav>
 </header>
 <main class="dashboard">
-<h2>Your Progress</h2>
+<div class="dashboard-header" data-aos="fade-up">
+<h2>Learning Progress Dashboard</h2>
+<p class="dashboard-subtitle">Track your data analytics journey</p>
+</div>
+
+<div class="dashboard-grid">
+<section class="progress-section" data-aos="fade-up">
+<h3>Skill Progress</h3>
 <div class="progress-container">
+<div class="progress-item">
+<div class="progress-header">
 <label>Python</label>
-<progress max="100" value="50"></progress>
+<span class="progress-percentage">50%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 50%"></div>
+</div>
+</div>
+<div class="progress-item">
+<div class="progress-header">
 <label>Excel</label>
-<progress max="100" value="10"></progress>
+<span class="progress-percentage">10%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 10%"></div>
+</div>
+</div>
+<div class="progress-item">
+<div class="progress-header">
 <label>SQL</label>
-<progress max="100" value="20"></progress>
+<span class="progress-percentage">20%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 20%"></div>
+</div>
+</div>
+<div class="progress-item">
+<div class="progress-header">
 <label>Power BI / Tableau</label>
-<progress max="100" value="0"></progress>
+<span class="progress-percentage">0%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 0%"></div>
+</div>
+</div>
+<div class="progress-item">
+<div class="progress-header">
 <label>Statistics</label>
-<progress max="100" value="15"></progress>
+<span class="progress-percentage">15%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 15%"></div>
+</div>
+</div>
+<div class="progress-item">
+<div class="progress-header">
 <label>Projects</label>
-<progress max="100" value="0"></progress>
+<span class="progress-percentage">0%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 0%"></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="stats-section" data-aos="fade-up">
+<h3>Quick Stats</h3>
+<div class="stats-grid">
+<div class="stat-card">
+<span class="stat-icon">📚</span>
+<div class="stat-info">
+<h4>Active Courses</h4>
+<p id="activeCoursesCount">0</p>
+</div>
+</div>
+<div class="stat-card">
+<span class="stat-icon">✅</span>
+<div class="stat-info">
+<h4>Completed Tasks</h4>
+<p id="completedTasksCount">0</p>
+</div>
+</div>
+<div class="stat-card">
+<span class="stat-icon">🎓</span>
+<div class="stat-info">
+<h4>Certificates</h4>
+<p id="certificatesCount">0</p>
+</div>
+</div>
+<div class="stat-card">
+<span class="stat-icon">⏱️</span>
+<div class="stat-info">
+<h4>Study Hours</h4>
+<p id="studyHours">0</p>
+</div>
+</div>
+</div>
+</section>
 </div>
 </main>
 <!-- AOS JS -->
@@ -60,5 +145,24 @@
   });
 </script>
 <script src="script.js"></script>
+
+<script>
+// Update stats from localStorage
+function updateStats() {
+const courses = JSON.parse(localStorage.getItem('courses')) || [];
+const todos = JSON.parse(localStorage.getItem('todos')) || [];
+const certificates = JSON.parse(localStorage.getItem('certificates')) || [];
+
+document.getElementById('activeCoursesCount').textContent = 
+courses.filter(course => course.status === 'In Progress').length;
+document.getElementById('completedTasksCount').textContent = 
+todos.filter(todo => todo.completed).length;
+document.getElementById('certificatesCount').textContent = certificates.length;
+document.getElementById('studyHours').textContent = 
+localStorage.getItem('studyHours') || '0';
+}
+
+window.addEventListener('load', updateStats);
+</script>
 </body>
 </html>

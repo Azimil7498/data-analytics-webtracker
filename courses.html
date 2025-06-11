@@ -33,28 +33,68 @@
 </header>
 <!-- Main Content -->
 <main class="course-section">
-<section>
-<h2>My Courses</h2>
-<ul id="courseList"></ul>
-<input id="courseInput" placeholder="Add new course..." type="text">
-<button onclick="addCourse()">Add Course</button>
-</input></section>
+<div class="course-header" data-aos="fade-up">
+<h2>My Learning Journey</h2>
+<p class="course-subtitle">Track and manage your courses</p>
+</div>
+
+<div class="course-container" data-aos="fade-up">
+<div class="course-input-section">
+<div class="input-group">
+<input id="courseInput" type="text" placeholder="Add new course..." />
+<select id="courseCategory">
+<option value="Data Analysis">Data Analysis</option>
+<option value="Programming">Programming</option>
+<option value="Statistics">Statistics</option>
+<option value="Visualization">Visualization</option>
+<option value="Other">Other</option>
+</select>
+<button onclick="addCourse()" class="add-btn">Add Course</button>
+</div>
+</div>
+
+<div class="course-filters">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="In Progress">In Progress</button>
+<button class="filter-btn" data-filter="Completed">Completed</button>
+</div>
+
+<div class="course-list-container">
+<ul id="courseList" class="course-list"></ul>
+</div>
+</div>
 </main>
 <!-- Course Handling Script -->
 <script>
     const courseList = document.getElementById("courseList");
     const courseInput = document.getElementById("courseInput");
+    const courseCategory = document.getElementById("courseCategory");
+    const filterButtons = document.querySelectorAll('.filter-btn');
 
-    window.onload = function () {
+    window.onload = function() {
       loadCourses();
+      setupFilterListeners();
     };
+
+    function setupFilterListeners() {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadCourses(btn.dataset.filter);
+        });
+      });
+    }
 
     function addCourse() {
       if (courseInput.value.trim() === "") return;
 
       const course = {
         name: courseInput.value,
+        category: courseCategory.value,
         status: "In Progress",
+        startDate: new Date().toISOString(),
+        progress: 0
       };
 
       let courses = JSON.parse(localStorage.getItem("courses")) || [];
@@ -64,40 +104,69 @@
       loadCourses();
     }
 
+    function updateCourseProgress(index, progress) {
+      let courses = JSON.parse(localStorage.getItem("courses"));
+      courses[index].progress = progress;
+      if (progress === 100) {
+        courses[index].status = "Completed";
+      }
+      localStorage.setItem("courses", JSON.stringify(courses));
+      loadCourses();
+    }
+
     function toggleCourseStatus(index) {
       let courses = JSON.parse(localStorage.getItem("courses"));
-      courses[index].status =
-        courses[index].status === "In Progress" ? "Completed" : "In Progress";
+      courses[index].status = courses[index].status === "In Progress" ? "Completed" : "In Progress";
+      if (courses[index].status === "Completed") {
+        courses[index].progress = 100;
+      }
       localStorage.setItem("courses", JSON.stringify(courses));
       loadCourses();
     }
 
     function deleteCourse(index) {
-      let courses = JSON.parse(localStorage.getItem("courses"));
-      courses.splice(index, 1);
-      localStorage.setItem("courses", JSON.stringify(courses));
-      loadCourses();
+      if (confirm("Are you sure you want to delete this course?")) {
+        let courses = JSON.parse(localStorage.getItem("courses"));
+        courses.splice(index, 1);
+        localStorage.setItem("courses", JSON.stringify(courses));
+        loadCourses();
+      }
     }
 
-    function loadCourses() {
+    function loadCourses(filter = 'all') {
       courseList.innerHTML = "";
       let courses = JSON.parse(localStorage.getItem("courses")) || [];
+      
+      if (filter !== 'all') {
+        courses = courses.filter(course => course.status === filter);
+      }
 
       courses.forEach((course, index) => {
         const li = document.createElement("li");
-        li.innerHTML = `
-          <span>${course.name} - <strong>${course.status}</strong></span>
-          <div>
-            <button onclick="toggleCourseStatus(${index})">Toggle</button>
-            <button onclick="deleteCourse(${index})">❌</button>
+        li.className = `course-item ${course.status.toLowerCase()}`;
+        
+        const progressBar = `
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${course.progress}%"></div>
           </div>
         `;
-        li.style.padding = "0.5rem";
-        li.style.backgroundColor = "#fff";
-        li.style.marginBottom = "0.5rem";
-        li.style.display = "flex";
-        li.style.justifyContent = "space-between";
-        li.style.alignItems = "center";
+
+        li.innerHTML = `
+          <div class="course-info">
+            <h3>${course.name}</h3>
+            <span class="course-category">${course.category}</span>
+            <span class="course-status ${course.status.toLowerCase()}">${course.status}</span>
+          </div>
+          ${progressBar}
+          <div class="course-actions">
+            <input type="range" min="0" max="100" value="${course.progress}" 
+                   onchange="updateCourseProgress(${index}, this.value)">
+            <button onclick="toggleCourseStatus(${index})" class="toggle-btn">
+              ${course.status === "In Progress" ? "Complete" : "Restart"}
+            </button>
+            <button onclick="deleteCourse(${index})" class="delete-btn">Delete</button>
+          </div>
+        `;
         courseList.appendChild(li);
       });
     }

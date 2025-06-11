@@ -4,44 +4,120 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Manage your data analytics tasks and track your progress with Azmil's Tracker."/>
+<meta name="theme-color" content="#0f2027"/>
 <title>To-Do List - Azmil's Tracker</title>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <!-- AOS CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet">
-</link></head>
+<!-- Preload critical assets -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+</head>
 
-<body><button id="scrollToTopBtn" title="Go to top">↑</button>
+<body><button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
 <header>
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Main navigation">
 <h1 class="logo">📊 Azmil's Tracker</h1>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+<label class="theme-switch" aria-label="Toggle dark/light theme">
+<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
+<span class="slider"></span>
+</label>
 <ul class="nav-links" id="navLinks">
 <li><a href="index.html">Home</a></li>
 <li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html">To-Do</a></li>
+<li><a href="todo.html" aria-current="page">To-Do</a></li>
 <li><a href="courses.html">Courses</a></li>
 <li><a href="certificates.html">Certificates</a></li>
 <li><a href="about.html">About</a></li>
 </ul>
-<label class="theme-switch">
-<input id="toggleTheme" type="checkbox"/>
-<span class="slider"></span>
-</label>
 </nav>
 </header>
-<main class="todo-section">
+<main>
+<section class="todo-section" aria-label="Todo section">
+<div class="todo-header" data-aos="fade-up">
 <h2>Your To-Do List</h2>
-<input id="taskInput" placeholder="Enter new task..." type="text">
-<button onclick="addTask()">Add Task</button>
-<ul id="taskList"></ul>
-</input></main>
+<p class="subtitle">Track your data analytics tasks and progress</p>
+</div>
+
+<div class="todo-stats" data-aos="fade-up" data-aos-delay="100">
+<div class="stat-card">
+<span class="stat-icon">📝</span>
+<h3>Total Tasks</h3>
+<p class="stat-value" id="totalTasks">0</p>
+</div>
+<div class="stat-card">
+<span class="stat-icon">✅</span>
+<h3>Completed</h3>
+<p class="stat-value" id="completedTasks">0</p>
+</div>
+<div class="stat-card">
+<span class="stat-icon">⏳</span>
+<h3>Pending</h3>
+<p class="stat-value" id="pendingTasks">0</p>
+</div>
+</div>
+
+<div class="todo-filters" data-aos="fade-up" data-aos-delay="200">
+<button class="filter-button active" data-filter="all">All</button>
+<button class="filter-button" data-filter="active">Active</button>
+<button class="filter-button" data-filter="completed">Completed</button>
+</div>
+
+<div class="todo-form" data-aos="fade-up" data-aos-delay="300">
+<div class="input-group">
+<input type="text" id="taskInput" placeholder="Enter new task..." aria-label="New task input"/>
+<input type="date" id="taskDate" aria-label="Task due date"/>
+<select id="taskPriority" aria-label="Task priority">
+<option value="low">Low Priority</option>
+<option value="medium">Medium Priority</option>
+<option value="high">High Priority</option>
+</select>
+<button onclick="addTask()" class="add-button">
+<span class="button-icon">➕</span> Add Task
+</button>
+</div>
+</div>
+
+<div class="todo-list" data-aos="fade-up" data-aos-delay="400">
+<ul id="taskList" class="task-list"></ul>
+</div>
+</section>
+</main>
+<footer>
+<p>&copy; 2024 Azmil's Data Analytics Tracker. All rights reserved.</p>
+</footer>
 <script>
     const taskInput = document.getElementById("taskInput");
+const taskDate = document.getElementById("taskDate");
+const taskPriority = document.getElementById("taskPriority");
 const taskList = document.getElementById("taskList");
+const filterButtons = document.querySelectorAll('.filter-button');
 
 window.onload = function () {
   loadTasks();
+  setupEventListeners();
+  updateTaskStats();
 };
+
+function setupEventListeners() {
+  // Filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      filterTasks(button.dataset.filter);
+    });
+  });
+
+  // Enter key to add task
+  taskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      addTask();
+    }
+  });
+}
 
 function addTask() {
   if (taskInput.value.trim() === "") return;
@@ -49,13 +125,21 @@ function addTask() {
   const task = {
     text: taskInput.value,
     done: false,
+    date: taskDate.value,
+    priority: taskPriority.value,
+    createdAt: new Date().toISOString()
   };
 
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  
   taskInput.value = "";
+  taskDate.value = "";
+  taskPriority.value = "low";
+  
   loadTasks();
+  updateTaskStats();
 }
 
 function loadTasks() {
@@ -64,10 +148,24 @@ function loadTasks() {
 
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
+    li.className = `task-item priority-${task.priority}`;
     li.innerHTML = `
-      <input type="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${index})">
-      <span style="text-decoration: ${task.done ? "line-through" : "none"}">${task.text}</span>
-      <button onclick="deleteTask(${index})">❌</button>
+      <div class="task-content">
+        <input type="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${index})" aria-label="Mark task as ${task.done ? 'incomplete' : 'complete'}">
+        <span class="task-text ${task.done ? 'completed' : ''}">${task.text}</span>
+        <div class="task-meta">
+          ${task.date ? `<span class="task-date">📅 ${task.date}</span>` : ''}
+          <span class="task-priority">${getPriorityIcon(task.priority)}</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button onclick="editTask(${index})" class="action-button edit" aria-label="Edit task">
+          ✏️
+        </button>
+        <button onclick="deleteTask(${index})" class="action-button delete" aria-label="Delete task">
+          🗑️
+        </button>
+      </div>
     `;
     taskList.appendChild(li);
   });
@@ -78,6 +176,7 @@ function toggleTask(index) {
   tasks[index].done = !tasks[index].done;
   localStorage.setItem("tasks", JSON.stringify(tasks));
   loadTasks();
+  updateTaskStats();
 }
 
 function deleteTask(index) {
@@ -85,9 +184,55 @@ function deleteTask(index) {
   tasks.splice(index, 1);
   localStorage.setItem("tasks", JSON.stringify(tasks));
   loadTasks();
+  updateTaskStats();
 }
 
-  </script>
+function editTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  const task = tasks[index];
+  
+  taskInput.value = task.text;
+  taskDate.value = task.date || '';
+  taskPriority.value = task.priority;
+  
+  deleteTask(index);
+  taskInput.focus();
+}
+
+function filterTasks(filter) {
+  const tasks = document.querySelectorAll('.task-item');
+  tasks.forEach(task => {
+    const isCompleted = task.querySelector('input[type="checkbox"]').checked;
+    if (filter === 'all' || 
+        (filter === 'active' && !isCompleted) || 
+        (filter === 'completed' && isCompleted)) {
+      task.style.display = 'flex';
+    } else {
+      task.style.display = 'none';
+    }
+  });
+}
+
+function updateTaskStats() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const total = tasks.length;
+  const completed = tasks.filter(task => task.done).length;
+  const pending = total - completed;
+
+  document.getElementById('totalTasks').textContent = total;
+  document.getElementById('completedTasks').textContent = completed;
+  document.getElementById('pendingTasks').textContent = pending;
+}
+
+function getPriorityIcon(priority) {
+  const icons = {
+    low: '🟢',
+    medium: '🟡',
+    high: '🔴'
+  };
+  return icons[priority] || '⚪';
+}
+</script>
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>

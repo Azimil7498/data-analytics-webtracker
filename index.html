@@ -4,24 +4,28 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Track your Data Analytics journey with Azmil's Tracker - A comprehensive platform for managing courses, certificates, and progress."/>
+<meta name="theme-color" content="#0f2027"/>
 <title>Azmil's Data Analytics Tracker</title>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <!-- AOS CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet">
-</link></head>
+<!-- Preload critical assets -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+</head>
 <body>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
+<button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
 <header>
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Main navigation">
 <h1 class="logo">📊 Azmil's Tracker</h1>
-<div class="hamburger" onclick="toggleMenu()">☰</div>
-<label class="theme-switch">
-<input id="toggleTheme" type="checkbox"/>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+<label class="theme-switch" aria-label="Toggle dark/light theme">
+<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
 <span class="slider"></span>
 </label>
 <ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
+<li><a href="index.html" aria-current="page">Home</a></li>
 <li><a href="dashboard.html">Dashboard</a></li>
 <li><a href="todo.html">To-Do</a></li>
 <li><a href="courses.html">Courses</a></li>
@@ -31,9 +35,34 @@
 </nav>
 </header>
 <main>
-<section class="hero">
-<h2>Welcome, Azmil!</h2>
-<p>Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
+<section class="hero" aria-label="Welcome section">
+<h2 data-aos="fade-up">Welcome, Azmil!</h2>
+<p data-aos="fade-up" data-aos-delay="100">Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
+<div class="hero-cta" data-aos="fade-up" data-aos-delay="200">
+<a href="dashboard.html" class="cta-button">View Dashboard</a>
+<a href="courses.html" class="cta-button secondary">Explore Courses</a>
+</div>
+</section>
+
+<section class="features" aria-label="Key features">
+<h2 data-aos="fade-up">Key Features</h2>
+<div class="features-grid">
+<div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+<span class="feature-icon">📊</span>
+<h3>Progress Tracking</h3>
+<p>Monitor your learning journey with detailed progress metrics</p>
+</div>
+<div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+<span class="feature-icon">📝</span>
+<h3>Course Management</h3>
+<p>Organize and track your courses and certifications</p>
+</div>
+<div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+<span class="feature-icon">✅</span>
+<h3>Task Management</h3>
+<p>Keep track of your daily tasks and goals</p>
+</div>
+</div>
 </section>
 </main>
 <!-- AOS JS -->

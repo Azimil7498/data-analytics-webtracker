@@ -4,42 +4,99 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Learn more about Azmil - A passionate Data Analytics student and aspiring data professional."/>
+<meta name="theme-color" content="#0f2027"/>
 <title>About - Azmil's Tracker</title>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <!-- AOS CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet">
-</link></head>
+<!-- Preload critical assets -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+</head>
 <body>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
+<button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
 <header>
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Main navigation">
 <h1 class="logo">📊 Azmil's Tracker</h1>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+<label class="theme-switch" aria-label="Toggle dark/light theme">
+<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
+<span class="slider"></span>
+</label>
 <ul class="nav-links" id="navLinks">
 <li><a href="index.html">Home</a></li>
 <li><a href="dashboard.html">Dashboard</a></li>
 <li><a href="todo.html">To-Do</a></li>
 <li><a href="courses.html">Courses</a></li>
 <li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html">About</a></li>
+<li><a href="about.html" aria-current="page">About</a></li>
 </ul>
-<label class="theme-switch">
-<input id="toggleTheme" type="checkbox"/>
-<span class="slider"></span>
-</label>
 </nav>
 </header>
-<main class="about-section">
+<main>
+<section class="about-section" aria-label="About section">
+<div class="about-header" data-aos="fade-up">
 <h2>About Me</h2>
-<div class="profile-card">
+<p class="subtitle">Get to know more about my journey in Data Analytics</p>
+</div>
+
+<div class="about-grid">
+<div class="profile-card" data-aos="fade-up" data-aos-delay="100">
 <img alt="Azmil's Photo" src="assets/images/profile.jpg"/>
 <h3>Shaikh Azimil Kabir</h3>
-<p><strong>Role:</strong> BTech CSE Student | Aspiring Data Analyst</p>
-<p>I’m passionate about data and how it drives decision-making. Currently exploring Python, Excel, SQL, and Power BI during my semester break.</p>
-<p>Dreaming of that office life with an ID card, laptop bag, elevator buzz, and solving real-world problems with data. 🔍📊</p>
-<p><strong>Email:</strong> azmilshaikh9@gmail.com</p>
-<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank">Click here</a></p>
+<p class="role"><strong>Role:</strong> BTech CSE Student | Aspiring Data Analyst</p>
+<div class="social-links">
+<a href="mailto:azmilshaikh9@gmail.com" class="social-link" aria-label="Email">
+<span class="icon">��</span> Email
+</a>
+<a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank" class="social-link" aria-label="LinkedIn">
+<span class="icon">💼</span> LinkedIn
+</a>
 </div>
+</div>
+
+<div class="about-content" data-aos="fade-up" data-aos-delay="200">
+<div class="about-card">
+<h3>My Journey</h3>
+<p>I'm passionate about data and how it drives decision-making. Currently exploring Python, Excel, SQL, and Power BI during my semester break.</p>
+<p>Dreaming of that office life with an ID card, laptop bag, elevator buzz, and solving real-world problems with data. 🔍📊</p>
+</div>
+
+<div class="skills-card" data-aos="fade-up" data-aos-delay="300">
+<h3>Skills & Tools</h3>
+<div class="skills-grid">
+<div class="skill-item">
+<span class="skill-icon">🐍</span>
+<span class="skill-name">Python</span>
+</div>
+<div class="skill-item">
+<span class="skill-icon">📊</span>
+<span class="skill-name">Excel</span>
+</div>
+<div class="skill-item">
+<span class="skill-icon">🗄️</span>
+<span class="skill-name">SQL</span>
+</div>
+<div class="skill-item">
+<span class="skill-icon">📈</span>
+<span class="skill-name">Power BI</span>
+</div>
+</div>
+</div>
+
+<div class="goals-card" data-aos="fade-up" data-aos-delay="400">
+<h3>Goals & Aspirations</h3>
+<ul class="goals-list">
+<li>Master data analysis and visualization techniques</li>
+<li>Build a strong portfolio of data projects</li>
+<li>Contribute to real-world data-driven solutions</li>
+<li>Network with industry professionals</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </main>
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
