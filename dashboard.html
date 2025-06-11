@@ -1,61 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Azmil's Tracker</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Azmil's Tracker</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet">
+</link></head>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<button id="scrollToTopBtn" title="Go to top">↑</button>
-
-<body>
-
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">📊 Azmil's Tracker</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="todo.html">To-Do</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-      <label class="theme-switch">
-  <input type="checkbox" id="toggleTheme">
-  <span class="slider"></span>
+<body><button id="scrollToTopBtn" title="Go to top">↑</button>
+<header>
+<nav class="navbar">
+<h1 class="logo">📊 Azmil's Tracker</h1>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="todo.html">To-Do</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+<label class="theme-switch">
+<input id="toggleTheme" type="checkbox"/>
+<span class="slider"></span>
 </label>
-
-    </nav>
-  </header>
-
-  <main class="dashboard">
-    <h2>Your Progress</h2>
-
-    <div class="progress-container">
-      <label>Python</label>
-      <progress value="50" max="100"></progress>
-
-      <label>Excel</label>
-      <progress value="10" max="100"></progress>
-
-      <label>SQL</label>
-      <progress value="20" max="100"></progress>
-
-      <label>Power BI / Tableau</label>
-      <progress value="0" max="100"></progress>
-
-      <label>Statistics</label>
-      <progress value="15" max="100"></progress>
-
-      <label>Projects</label>
-      <progress value="0" max="100"></progress>
-    </div>
-  </main>
+</nav>
+</header>
+<main class="dashboard">
+<h2>Your Progress</h2>
+<div class="progress-container">
+<label>Python</label>
+<progress max="100" value="50"></progress>
+<label>Excel</label>
+<progress max="100" value="10"></progress>
+<label>SQL</label>
+<progress max="100" value="20"></progress>
+<label>Power BI / Tableau</label>
+<progress max="100" value="0"></progress>
+<label>Statistics</label>
+<progress max="100" value="15"></progress>
+<label>Projects</label>
+<progress max="100" value="0"></progress>
+</div>
+</main>
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -69,9 +59,6 @@
     el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
   });
 </script>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
-

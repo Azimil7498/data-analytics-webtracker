@@ -1,50 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Azmil's Data Analytics Tracker</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azmil's Data Analytics Tracker</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet">
+</link></head>
 <body>
-  <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">📊 Azmil's Tracker</h1>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-
-      <label class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <span class="slider"></span>
-      </label>
-
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="todo.html">To-Do</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h2>Welcome, Azmil!</h2>
-      <p>Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
-    </section>
-  </main>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+<header>
+<nav class="navbar">
+<h1 class="logo">📊 Azmil's Tracker</h1>
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+<label class="theme-switch">
+<input id="toggleTheme" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="todo.html">To-Do</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<section class="hero">
+<h2>Welcome, Azmil!</h2>
+<p>Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
+</section>
+</main>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
     AOS.init({
       duration: 1000,
       once: true,
@@ -56,7 +50,6 @@
       el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
     });
   </script>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
