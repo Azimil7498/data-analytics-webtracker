@@ -84,3 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
     new NavigationManager();
     new ScrollToTop();
 }); 
+fetch('https://your-backend.onrender.com/api/certificates', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: "Python Basics",
+    platform: "Coursera"
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
