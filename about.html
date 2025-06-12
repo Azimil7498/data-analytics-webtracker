@@ -1,115 +1,165 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Learn more about Azmil - A passionate Data Analytics student and aspiring data professional."/>
-<meta name="theme-color" content="#0f2027"/>
-<title>About - Azmil's Tracker</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet">
-<!-- Preload critical assets -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Data Analytics Web Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
-<header>
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-<h1 class="logo">📊 Azmil's Tracker</h1>
-<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
-<label class="theme-switch" aria-label="Toggle dark/light theme">
-<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
-<span class="slider"></span>
-</label>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html">To-Do</a></li>
-<li><a href="courses.html">Courses</a></li>
-<li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html" aria-current="page">About</a></li>
-</ul>
-</nav>
-</header>
-<main>
-<section class="about-section" aria-label="About section">
-<div class="about-header" data-aos="fade-up">
-<h2>About Me</h2>
-<p class="subtitle">Get to know more about my journey in Data Analytics</p>
-</div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Analytics</span>
+        </div>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="certificates.html"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="todo.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </nav>
 
-<div class="about-grid">
-<div class="profile-card" data-aos="fade-up" data-aos-delay="100">
-<img alt="Azmil's Photo" src="assets/images/profile.jpg"/>
-<h3>Shaikh Azimil Kabir</h3>
-<p class="role"><strong>Role:</strong> BTech CSE Student | Aspiring Data Analyst</p>
-<div class="social-links">
-<a href="mailto:azmilshaikh9@gmail.com" class="social-link" aria-label="Email">
-<span class="icon">��</span> Email
-</a>
-<a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank" class="social-link" aria-label="LinkedIn">
-<span class="icon">💼</span> LinkedIn
-</a>
-</div>
-</div>
+    <!-- Main Content -->
+    <main class="about-section">
+        <div class="about-header">
+            <h2>About the Application</h2>
+            <p class="about-subtitle">Learn more about the Data Analytics Web Tracker</p>
+        </div>
 
-<div class="about-content" data-aos="fade-up" data-aos-delay="200">
-<div class="about-card">
-<h3>My Journey</h3>
-<p>I'm passionate about data and how it drives decision-making. Currently exploring Python, Excel, SQL, and Power BI during my semester break.</p>
-<p>Dreaming of that office life with an ID card, laptop bag, elevator buzz, and solving real-world problems with data. 🔍📊</p>
-</div>
+        <div class="about-container">
+            <section class="about-section">
+                <h3>What is Data Analytics Web Tracker?</h3>
+                <p>
+                    Data Analytics Web Tracker is a comprehensive web application designed to help you manage and track your data analytics learning journey. 
+                    Whether you're a beginner or an experienced professional, this tool helps you organize your courses, track your progress, and manage your certificates.
+                </p>
+            </section>
 
-<div class="skills-card" data-aos="fade-up" data-aos-delay="300">
-<h3>Skills & Tools</h3>
-<div class="skills-grid">
-<div class="skill-item">
-<span class="skill-icon">🐍</span>
-<span class="skill-name">Python</span>
-</div>
-<div class="skill-item">
-<span class="skill-icon">📊</span>
-<span class="skill-name">Excel</span>
-</div>
-<div class="skill-item">
-<span class="skill-icon">🗄️</span>
-<span class="skill-name">SQL</span>
-</div>
-<div class="skill-item">
-<span class="skill-icon">📈</span>
-<span class="skill-name">Power BI</span>
-</div>
-</div>
-</div>
+            <section class="features-section">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Course Management</h4>
+                        <p>Track your progress through various data analytics courses</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Certificate Tracking</h4>
+                        <p>Manage and showcase your earned certificates</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Task Organization</h4>
+                        <p>Keep track of your learning tasks and assignments</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Progress Analytics</h4>
+                        <p>Visualize your learning journey with interactive charts</p>
+                    </div>
+                </div>
+            </section>
 
-<div class="goals-card" data-aos="fade-up" data-aos-delay="400">
-<h3>Goals & Aspirations</h3>
-<ul class="goals-list">
-<li>Master data analysis and visualization techniques</li>
-<li>Build a strong portfolio of data projects</li>
-<li>Contribute to real-world data-driven solutions</li>
-<li>Network with industry professionals</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+            <section class="tech-section">
+                <h3>Technologies Used</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <i class="fab fa-html5"></i>
+                        <h4>HTML5</h4>
+                        <p>Modern semantic markup</p>
+                    </div>
+                    <div class="tech-card">
+                        <i class="fab fa-css3-alt"></i>
+                        <h4>CSS3</h4>
+                        <p>Responsive design and animations</p>
+                    </div>
+                    <div class="tech-card">
+                        <i class="fab fa-js"></i>
+                        <h4>JavaScript</h4>
+                        <p>Dynamic functionality and interactivity</p>
+                    </div>
+                    <div class="tech-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Local Storage</h4>
+                        <p>Client-side data persistence</p>
+                    </div>
+                </div>
+            </section>
 
-    // Auto-apply AOS to all relevant blocks
-    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
-      el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-    });
-  </script>
-<script src="script.js"></script></body>
-</html>
+            <section class="contact-section">
+                <h3>Contact & Support</h3>
+                <p>
+                    Have questions or need support? Feel free to reach out to us through any of the following channels:
+                </p>
+                <div class="contact-grid">
+                    <a href="https://github.com/Azimil7498" target="_blank" class="contact-card">
+                        <i class="fab fa-github"></i>
+                        <h4>GitHub</h4>
+                        <p>Report issues and contribute</p>
+                    </a>
+                    <a href="https://twitter.com/azimil7498" target="_blank" class="contact-card">
+                        <i class="fab fa-twitter"></i>
+                        <h4>Twitter</h4>
+                        <p>Follow for updates</p>
+                    </a>
+                    <a href="mailto:azimil7498@gmail.com" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>Get in touch directly</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Data Analytics Web Tracker</h3>
+                <p>Your personal learning companion</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Azimil7498" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/azimil7498" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Data Analytics Web Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,168 +1,197 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dashboard - Azmil's Tracker</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet">
-</link></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Data Analytics Web Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Analytics</span>
+        </div>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="certificates.html"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="todo.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </nav>
 
-<body><button id="scrollToTopBtn" title="Go to top">↑</button>
-<header>
-<nav class="navbar">
-<h1 class="logo">📊 Azmil's Tracker</h1>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html">To-Do</a></li>
-<li><a href="courses.html">Courses</a></li>
-<li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html">About</a></li>
-</ul>
-<label class="theme-switch">
-<input id="toggleTheme" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</nav>
-</header>
-<main class="dashboard">
-<div class="dashboard-header" data-aos="fade-up">
-<h2>Learning Progress Dashboard</h2>
-<p class="dashboard-subtitle">Track your data analytics journey</p>
-</div>
+    <!-- Main Content -->
+    <main class="dashboard-section">
+        <div class="dashboard-header">
+            <h2>Learning Dashboard</h2>
+            <p class="dashboard-subtitle">Track your progress and achievements</p>
+        </div>
 
-<div class="dashboard-grid">
-<section class="progress-section" data-aos="fade-up">
-<h3>Skill Progress</h3>
-<div class="progress-container">
-<div class="progress-item">
-<div class="progress-header">
-<label>Python</label>
-<span class="progress-percentage">50%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 50%"></div>
-</div>
-</div>
-<div class="progress-item">
-<div class="progress-header">
-<label>Excel</label>
-<span class="progress-percentage">10%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 10%"></div>
-</div>
-</div>
-<div class="progress-item">
-<div class="progress-header">
-<label>SQL</label>
-<span class="progress-percentage">20%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 20%"></div>
-</div>
-</div>
-<div class="progress-item">
-<div class="progress-header">
-<label>Power BI / Tableau</label>
-<span class="progress-percentage">0%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 0%"></div>
-</div>
-</div>
-<div class="progress-item">
-<div class="progress-header">
-<label>Statistics</label>
-<span class="progress-percentage">15%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 15%"></div>
-</div>
-</div>
-<div class="progress-item">
-<div class="progress-header">
-<label>Projects</label>
-<span class="progress-percentage">0%</span>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" style="width: 0%"></div>
-</div>
-</div>
-</div>
-</section>
+        <div class="dashboard-grid">
+            <!-- Stats Cards -->
+            <div class="stats-card">
+                <i class="fas fa-book"></i>
+                <h3>Total Courses</h3>
+                <p id="totalCourses">0</p>
+            </div>
+            <div class="stats-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>Completed</h3>
+                <p id="completedCourses">0</p>
+            </div>
+            <div class="stats-card">
+                <i class="fas fa-clock"></i>
+                <h3>In Progress</h3>
+                <p id="inProgressCourses">0</p>
+            </div>
+            <div class="stats-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Certificates</h3>
+                <p id="totalCertificates">0</p>
+            </div>
 
-<section class="stats-section" data-aos="fade-up">
-<h3>Quick Stats</h3>
-<div class="stats-grid">
-<div class="stat-card">
-<span class="stat-icon">📚</span>
-<div class="stat-info">
-<h4>Active Courses</h4>
-<p id="activeCoursesCount">0</p>
-</div>
-</div>
-<div class="stat-card">
-<span class="stat-icon">✅</span>
-<div class="stat-info">
-<h4>Completed Tasks</h4>
-<p id="completedTasksCount">0</p>
-</div>
-</div>
-<div class="stat-card">
-<span class="stat-icon">🎓</span>
-<div class="stat-info">
-<h4>Certificates</h4>
-<p id="certificatesCount">0</p>
-</div>
-</div>
-<div class="stat-card">
-<span class="stat-icon">⏱️</span>
-<div class="stat-info">
-<h4>Study Hours</h4>
-<p id="studyHours">0</p>
-</div>
-</div>
-</div>
-</section>
-</div>
-</main>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init(
-    {
-      duration: 1000,
-      once: true
-    }
-  );
-    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
-    el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-  });
-</script>
-<script src="script.js"></script>
+            <!-- Progress Chart -->
+            <div class="chart-card">
+                <h3>Course Progress</h3>
+                <canvas id="progressChart"></canvas>
+            </div>
 
-<script>
-// Update stats from localStorage
-function updateStats() {
-const courses = JSON.parse(localStorage.getItem('courses')) || [];
-const todos = JSON.parse(localStorage.getItem('todos')) || [];
-const certificates = JSON.parse(localStorage.getItem('certificates')) || [];
+            <!-- Category Distribution -->
+            <div class="chart-card">
+                <h3>Category Distribution</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
 
-document.getElementById('activeCoursesCount').textContent = 
-courses.filter(course => course.status === 'In Progress').length;
-document.getElementById('completedTasksCount').textContent = 
-todos.filter(todo => todo.completed).length;
-document.getElementById('certificatesCount').textContent = certificates.length;
-document.getElementById('studyHours').textContent = 
-localStorage.getItem('studyHours') || '0';
-}
+            <!-- Recent Activity -->
+            <div class="activity-card">
+                <h3>Recent Activity</h3>
+                <ul id="activityList" class="activity-list"></ul>
+            </div>
+        </div>
+    </main>
 
-window.addEventListener('load', updateStats);
-</script>
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+
+    <script src="script.js"></script>
+    <script>
+        // Dashboard Statistics
+        function updateDashboardStats() {
+            const courses = JSON.parse(localStorage.getItem("courses")) || [];
+            const certificates = JSON.parse(localStorage.getItem("certificates")) || [];
+
+            document.getElementById("totalCourses").textContent = courses.length;
+            document.getElementById("completedCourses").textContent = 
+                courses.filter(course => course.status === "Completed").length;
+            document.getElementById("inProgressCourses").textContent = 
+                courses.filter(course => course.status === "In Progress").length;
+            document.getElementById("totalCertificates").textContent = certificates.length;
+
+            updateCharts(courses);
+            updateActivityList(courses);
+        }
+
+        // Progress Chart
+        function updateCharts(courses) {
+            // Progress Chart
+            const progressCtx = document.getElementById('progressChart').getContext('2d');
+            new Chart(progressCtx, {
+                type: 'line',
+                data: {
+                    labels: courses.map(course => course.name),
+                    datasets: [{
+                        label: 'Progress',
+                        data: courses.map(course => course.progress),
+                        borderColor: '#4a90e2',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Category Distribution Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            const categories = {};
+            courses.forEach(course => {
+                categories[course.category] = (categories[course.category] || 0) + 1;
+            });
+
+            new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            '#4a90e2',
+                            '#2c3e50',
+                            '#e74c3c',
+                            '#27ae60',
+                            '#f1c40f'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        // Activity List
+        function updateActivityList(courses) {
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = '';
+
+            const sortedCourses = [...courses].sort((a, b) => 
+                new Date(b.startDate) - new Date(a.startDate)
+            ).slice(0, 5);
+
+            sortedCourses.forEach(course => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="activity-item">
+                        <span class="activity-icon">
+                            <i class="fas ${course.status === 'Completed' ? 'fa-check-circle' : 'fa-clock'}"></i>
+                        </span>
+                        <div class="activity-details">
+                            <h4>${course.name}</h4>
+                            <p>${course.status} - ${course.progress}%</p>
+                        </div>
+                        <span class="activity-time">
+                            ${new Date(course.startDate).toLocaleDateString()}
+                        </span>
+                    </div>
+                `;
+                activityList.appendChild(li);
+            });
+        }
+
+        // Initialize Dashboard
+        window.onload = function() {
+            updateDashboardStats();
+        };
+    </script>
 </body>
-</html>
+</html> 

@@ -1,84 +1,117 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Track your Data Analytics journey with Azmil's Tracker - A comprehensive platform for managing courses, certificates, and progress."/>
-<meta name="theme-color" content="#0f2027"/>
-<title>Azmil's Data Analytics Tracker</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet">
-<!-- Preload critical assets -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics Web Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
-<header>
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-<h1 class="logo">📊 Azmil's Tracker</h1>
-<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
-<label class="theme-switch" aria-label="Toggle dark/light theme">
-<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
-<span class="slider"></span>
-</label>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html" aria-current="page">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html">To-Do</a></li>
-<li><a href="courses.html">Courses</a></li>
-<li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html">About</a></li>
-</ul>
-</nav>
-</header>
-<main>
-<section class="hero" aria-label="Welcome section">
-<h2 data-aos="fade-up">Welcome, Azmil!</h2>
-<p data-aos="fade-up" data-aos-delay="100">Track your entire Data Analytics journey here. Stay consistent, stay focused 💪</p>
-<div class="hero-cta" data-aos="fade-up" data-aos-delay="200">
-<a href="dashboard.html" class="cta-button">View Dashboard</a>
-<a href="courses.html" class="cta-button secondary">Explore Courses</a>
-</div>
-</section>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Analytics</span>
+        </div>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="certificates.html"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="todo.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </nav>
 
-<section class="features" aria-label="Key features">
-<h2 data-aos="fade-up">Key Features</h2>
-<div class="features-grid">
-<div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-<span class="feature-icon">📊</span>
-<h3>Progress Tracking</h3>
-<p>Monitor your learning journey with detailed progress metrics</p>
-</div>
-<div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-<span class="feature-icon">📝</span>
-<h3>Course Management</h3>
-<p>Organize and track your courses and certifications</p>
-</div>
-<div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-<span class="feature-icon">✅</span>
-<h3>Task Management</h3>
-<p>Keep track of your daily tasks and goals</p>
-</div>
-</div>
-</section>
-</main>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Track Your Data Analytics Journey</h1>
+            <p>Monitor your progress, manage courses, and achieve your learning goals</p>
+            <div class="hero-buttons">
+                <a href="courses.html" class="btn primary">Start Learning</a>
+                <a href="dashboard.html" class="btn secondary">View Progress</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/images/datanalytics.png" alt="Data Analytics Illustration">
+        </div>
+    </section>
 
-    // Automatically apply AOS to common sections
-    const sections = document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard, .todo-section');
-    sections.forEach((el, index) => {
-      el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-    });
-  </script>
-<script src="script.js"></script>
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-book"></i>
+                <h3>Course Tracking</h3>
+                <p>Track your progress through various data analytics courses</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Certificates</h3>
+                <p>Manage and showcase your earned certificates</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Task Management</h3>
+                <p>Organize your learning tasks and assignments</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Progress Analytics</h3>
+                <p>Visualize your learning journey and achievements</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>Join thousands of learners tracking their data analytics progress</p>
+        <a href="courses.html" class="btn primary">Get Started</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Data Analytics Web Tracker</h3>
+                <p>Your personal learning companion</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Azimil7498"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/azimil-shaikh-854b0328b"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Data Analytics Web Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 

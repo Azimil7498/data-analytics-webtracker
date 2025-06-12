@@ -1,248 +1,172 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Manage your data analytics tasks and track your progress with Azmil's Tracker."/>
-<meta name="theme-color" content="#0f2027"/>
-<title>To-Do List - Azmil's Tracker</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet">
-<!-- Preload critical assets -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks - Data Analytics Web Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
-<body><button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
-<header>
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-<h1 class="logo">📊 Azmil's Tracker</h1>
-<button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
-<label class="theme-switch" aria-label="Toggle dark/light theme">
-<input id="toggleTheme" type="checkbox" aria-label="Theme toggle"/>
-<span class="slider"></span>
-</label>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="todo.html" aria-current="page">To-Do</a></li>
-<li><a href="courses.html">Courses</a></li>
-<li><a href="certificates.html">Certificates</a></li>
-<li><a href="about.html">About</a></li>
-</ul>
-</nav>
-</header>
-<main>
-<section class="todo-section" aria-label="Todo section">
-<div class="todo-header" data-aos="fade-up">
-<h2>Your To-Do List</h2>
-<p class="subtitle">Track your data analytics tasks and progress</p>
-</div>
-
-<div class="todo-stats" data-aos="fade-up" data-aos-delay="100">
-<div class="stat-card">
-<span class="stat-icon">📝</span>
-<h3>Total Tasks</h3>
-<p class="stat-value" id="totalTasks">0</p>
-</div>
-<div class="stat-card">
-<span class="stat-icon">✅</span>
-<h3>Completed</h3>
-<p class="stat-value" id="completedTasks">0</p>
-</div>
-<div class="stat-card">
-<span class="stat-icon">⏳</span>
-<h3>Pending</h3>
-<p class="stat-value" id="pendingTasks">0</p>
-</div>
-</div>
-
-<div class="todo-filters" data-aos="fade-up" data-aos-delay="200">
-<button class="filter-button active" data-filter="all">All</button>
-<button class="filter-button" data-filter="active">Active</button>
-<button class="filter-button" data-filter="completed">Completed</button>
-</div>
-
-<div class="todo-form" data-aos="fade-up" data-aos-delay="300">
-<div class="input-group">
-<input type="text" id="taskInput" placeholder="Enter new task..." aria-label="New task input"/>
-<input type="date" id="taskDate" aria-label="Task due date"/>
-<select id="taskPriority" aria-label="Task priority">
-<option value="low">Low Priority</option>
-<option value="medium">Medium Priority</option>
-<option value="high">High Priority</option>
-</select>
-<button onclick="addTask()" class="add-button">
-<span class="button-icon">➕</span> Add Task
-</button>
-</div>
-</div>
-
-<div class="todo-list" data-aos="fade-up" data-aos-delay="400">
-<ul id="taskList" class="task-list"></ul>
-</div>
-</section>
-</main>
-<footer>
-<p>&copy; 2024 Azmil's Data Analytics Tracker. All rights reserved.</p>
-</footer>
-<script>
-    const taskInput = document.getElementById("taskInput");
-const taskDate = document.getElementById("taskDate");
-const taskPriority = document.getElementById("taskPriority");
-const taskList = document.getElementById("taskList");
-const filterButtons = document.querySelectorAll('.filter-button');
-
-window.onload = function () {
-  loadTasks();
-  setupEventListeners();
-  updateTaskStats();
-};
-
-function setupEventListeners() {
-  // Filter buttons
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-      filterTasks(button.dataset.filter);
-    });
-  });
-
-  // Enter key to add task
-  taskInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      addTask();
-    }
-  });
-}
-
-function addTask() {
-  if (taskInput.value.trim() === "") return;
-
-  const task = {
-    text: taskInput.value,
-    done: false,
-    date: taskDate.value,
-    priority: taskPriority.value,
-    createdAt: new Date().toISOString()
-  };
-
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.push(task);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  
-  taskInput.value = "";
-  taskDate.value = "";
-  taskPriority.value = "low";
-  
-  loadTasks();
-  updateTaskStats();
-}
-
-function loadTasks() {
-  taskList.innerHTML = "";
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.className = `task-item priority-${task.priority}`;
-    li.innerHTML = `
-      <div class="task-content">
-        <input type="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${index})" aria-label="Mark task as ${task.done ? 'incomplete' : 'complete'}">
-        <span class="task-text ${task.done ? 'completed' : ''}">${task.text}</span>
-        <div class="task-meta">
-          ${task.date ? `<span class="task-date">📅 ${task.date}</span>` : ''}
-          <span class="task-priority">${getPriorityIcon(task.priority)}</span>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Analytics</span>
         </div>
-      </div>
-      <div class="task-actions">
-        <button onclick="editTask(${index})" class="action-button edit" aria-label="Edit task">
-          ✏️
-        </button>
-        <button onclick="deleteTask(${index})" class="action-button delete" aria-label="Delete task">
-          🗑️
-        </button>
-      </div>
-    `;
-    taskList.appendChild(li);
-  });
-}
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="certificates.html"><i class="fas fa-certificate"></i> Certificates</a></li>
+            <li><a href="todo.html" class="active"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </nav>
 
-function toggleTask(index) {
-  let tasks = JSON.parse(localStorage.getItem("tasks"));
-  tasks[index].done = !tasks[index].done;
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  loadTasks();
-  updateTaskStats();
-}
+    <!-- Main Content -->
+    <main class="todo-section">
+        <div class="todo-header">
+            <h2>Task Management</h2>
+            <p class="todo-subtitle">Organize your learning tasks and assignments</p>
+        </div>
 
-function deleteTask(index) {
-  let tasks = JSON.parse(localStorage.getItem("tasks"));
-  tasks.splice(index, 1);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  loadTasks();
-  updateTaskStats();
-}
+        <div class="todo-container">
+            <div class="todo-input-section">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Add new task...">
+                    <select id="taskPriority">
+                        <option value="Low">Low Priority</option>
+                        <option value="Medium">Medium Priority</option>
+                        <option value="High">High Priority</option>
+                    </select>
+                    <input type="date" id="taskDueDate">
+                    <button class="add-btn" onclick="addTask()">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </div>
+            </div>
 
-function editTask(index) {
-  let tasks = JSON.parse(localStorage.getItem("tasks"));
-  const task = tasks[index];
-  
-  taskInput.value = task.text;
-  taskDate.value = task.date || '';
-  taskPriority.value = task.priority;
-  
-  deleteTask(index);
-  taskInput.focus();
-}
+            <div class="todo-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="pending">Pending</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
 
-function filterTasks(filter) {
-  const tasks = document.querySelectorAll('.task-item');
-  tasks.forEach(task => {
-    const isCompleted = task.querySelector('input[type="checkbox"]').checked;
-    if (filter === 'all' || 
-        (filter === 'active' && !isCompleted) || 
-        (filter === 'completed' && isCompleted)) {
-      task.style.display = 'flex';
-    } else {
-      task.style.display = 'none';
-    }
-  });
-}
+            <div class="todo-list-container">
+                <ul id="taskList" class="task-list"></ul>
+            </div>
+        </div>
+    </main>
 
-function updateTaskStats() {
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const total = tasks.length;
-  const completed = tasks.filter(task => task.done).length;
-  const pending = total - completed;
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
 
-  document.getElementById('totalTasks').textContent = total;
-  document.getElementById('completedTasks').textContent = completed;
-  document.getElementById('pendingTasks').textContent = pending;
-}
+    <script src="script.js"></script>
+    <script>
+        // Task Management
+        const taskList = document.getElementById("taskList");
+        const taskInput = document.getElementById("taskInput");
+        const taskPriority = document.getElementById("taskPriority");
+        const taskDueDate = document.getElementById("taskDueDate");
+        const filterButtons = document.querySelectorAll('.filter-btn');
 
-function getPriorityIcon(priority) {
-  const icons = {
-    low: '🟢',
-    medium: '🟡',
-    high: '🔴'
-  };
-  return icons[priority] || '⚪';
-}
-</script>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-    document.querySelectorAll('.card, .cert-card, .profile-card, .hero, .course-section, .about-section, .dashboard').forEach((el, index) => {
-    el.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'fade-right');
-  });
-</script>
-<script src="script.js"></script></body>
-</html>
+        window.onload = function() {
+            loadTasks();
+            setupFilterListeners();
+        };
+
+        function setupFilterListeners() {
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    loadTasks(btn.dataset.filter);
+                });
+            });
+        }
+
+        function addTask() {
+            if (taskInput.value.trim() === "") return;
+
+            const task = {
+                name: taskInput.value,
+                priority: taskPriority.value,
+                dueDate: taskDueDate.value,
+                status: "pending",
+                createdAt: new Date().toISOString()
+            };
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            
+            taskInput.value = "";
+            taskDueDate.value = "";
+            loadTasks();
+        }
+
+        function toggleTaskStatus(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks[index].status = tasks[index].status === "pending" ? "completed" : "pending";
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            loadTasks();
+        }
+
+        function deleteTask(index) {
+            if (confirm("Are you sure you want to delete this task?")) {
+                let tasks = JSON.parse(localStorage.getItem("tasks"));
+                tasks.splice(index, 1);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                loadTasks();
+            }
+        }
+
+        function loadTasks(filter = 'all') {
+            taskList.innerHTML = "";
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            
+            if (filter !== 'all') {
+                tasks = tasks.filter(task => task.status === filter);
+            }
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement("li");
+                li.className = `task-item ${task.status} ${task.priority.toLowerCase()}`;
+                
+                li.innerHTML = `
+                    <div class="task-info">
+                        <h3>${task.name}</h3>
+                        <div class="task-meta">
+                            <span class="task-priority ${task.priority.toLowerCase()}">
+                                <i class="fas fa-flag"></i> ${task.priority}
+                            </span>
+                            <span class="task-due-date">
+                                <i class="fas fa-calendar"></i> ${new Date(task.dueDate).toLocaleDateString()}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="task-actions">
+                        <button onclick="toggleTaskStatus(${index})" class="toggle-btn">
+                            ${task.status === "pending" ? "Complete" : "Restart"}
+                        </button>
+                        <button onclick="deleteTask(${index})" class="delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                taskList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html> 
